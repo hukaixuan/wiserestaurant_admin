@@ -39,11 +39,15 @@ Route::group(['middleware' => ['web','auth'],'namespace' => 'Admin','prefix' => 
     // Route::auth();
     Route::get('/', 'AdminController@index');
     Route::resource('good', 'GoodController');
+    Route::resource('other', 'GoodController@other');
+    Route::get('get_good_by_type/{type_id}', 'GoodController@get_good_by_type');
+    Route::get('get_good_by_category/{category_id}', 'GoodController@get_good_by_category');
     Route::get('seat/create_a_qrcode/{seat_id}','SeatController@create_a_qrcode');
     Route::get('seat/create_qrcodes','SeatController@create_qrcodes');
     Route::resource('seat','SeatController');
     Route::resource('type','TypeController');
     Route::resource('category','CategoryController');
+    Route::resource('package','PackageController');
     // Route::get('login', 'AuthController@getLogin');
     // Route::post('login', 'AuthController@postLogin');
     // Route::get('register', 'AuthController@getRegister');

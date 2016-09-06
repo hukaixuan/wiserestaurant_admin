@@ -20,10 +20,32 @@ class GoodController extends Controller
     // }
 
 
+    //菜品
     public function index()
     {
-        $goods = DB::table('goods')->paginate(5);  //分页显示
-    	return View('admin/good/index')->withGoods($goods);
+        // $goods = DB::table('goods')->paginate(5);  //分页显示  //用了分页无法用模型关联了
+     //    $goods = Good::paginate(5);    //得用基于Eloquent模型的分页才能用模型的关联
+    	// return View('admin/good/index')->withGoods($goods);
+        $goods = Good::where('category_id',1)->paginate(5);
+        return View('admin/good/index')->withGoods($goods)->withTypes(Type::all());
+    }
+    //其他
+    public function other()
+    {
+        $goods = Good::where('category_id','<>',1)->paginate(5);
+        return View('admin/other/index')->withGoods($goods)->withCategories(Category::where('id','<>',1)->get());
+    }
+    //根据菜品分类得到菜品
+    public function get_good_by_type($type_id)
+    {
+        $goods = Good::where('category_id',1)->where('type_id',$type_id)->paginate(5);
+        return View('admin/good/index')->withGoods($goods)->withTypes(Type::all());
+    }
+    //根据category得到其他
+    public function get_good_by_category($category_id)
+    {
+        $goods = Good::where('category_id',$category_id)->paginate(5);
+        return View('admin/other/index')->withGoods($goods)->withCategories(Category::where('id','<>',1)->get());
     }
 
     //新建
@@ -35,26 +57,47 @@ class GoodController extends Controller
     public function store(Request $request){
     	$this -> validate($request,[
     			'name' => 'required',
-    			'type' => 'required',
+    			'type_id' => 'required',
     			'price' => 'required',
     		]);
     	$Good = new Good;
     	$Good->name = $request->get('name');
-    	$Good->type = $request->get('type');
+    	$Good->type_id = $request->get('type_id');
     	$Good->price = $request->get('price');
     	$Good->detail = $request->get('detail');
     	$Good->isNew = $request->get('isNew');
-    	$Good->category = $request->get('category');
+    	$Good->category_id = $request->get('category_id');
         //保存图片
         $pic = $request->file('pic');
         if (is_null($pic)) {
             $Good->pic = '待上传';
         } else {
-            $filedir = "upload/good_img/";
+            $filedir = "images/";   //上传图片的存放路径
             $image_name=$pic->getClientOriginalName(); //获取上传图片的文件名
             $pic->move($filedir,$image_name); //使用move 方法移动文件.
             $Good->pic = $filedir.$image_name;
 
+        }
+
+        //详情图
+        $detailPic = $request->file('detailPics');
+        if (is_null($detailPic)) {
+            if ($request->get('detailPic')=='待上传') {
+                $Good->pic = '待上传';
+                
+            }
+        } else {
+            $filedir = "images/";
+            $image_name2=$detailPic->getClientOriginalName(); //获取上传图片的文件名
+            $detailPic->move($filedir,$image_name2); //使用move 方法移动文件.
+            if ($Good->detailPics) {
+                # 如果数据库中以前存储的detailPics不为空
+                $Good->detailPics = $Good->detailPics.'#'.$filedir.$image_name2;
+            } else {
+                # code...
+                $Good->detailPics = $filedir.$image_name2;
+            }
+            
         }
         
     	if ($Good->save()) {
@@ -72,16 +115,16 @@ class GoodController extends Controller
     public function update(Request $request, $id){
     	$this -> validate($request,[
     			'name' => 'required',  //email exists filled image in prsesnt regex required required_if required_unless required_with required_with_all same size
-    			'type' => 'required',
+    			'type_id' => 'required',
     			'price' => 'required',
     		]);
     	$Good = Good::find($id);
     	$Good->name = $request->get('name');
-    	$Good->type = $request->get('type');
+    	$Good->type_id = $request->get('type_id');
     	$Good->price = $request->get('price');
     	$Good->detail = $request->get('detail');
     	$Good->isNew = $request->get('isNew');
-    	$Good->category = $request->get('category');
+    	$Good->category_id = $request->get('category_id');
         //保存图片
         $pic = $request->file('pic');
         if (is_null($pic)) {
@@ -90,11 +133,31 @@ class GoodController extends Controller
                 
             }
         } else {
-            $filedir = "upload/good_img/";
+            $filedir = "images/";
             $image_name=$pic->getClientOriginalName(); //获取上传图片的文件名
             $pic->move($filedir,$image_name); //使用move 方法移动文件.
             $Good->pic = $filedir.$image_name;
 
+        }
+        //详情图
+        $detailPic = $request->file('detailPics');
+        if (is_null($detailPic)) {
+            if ($request->get('detailPic')=='待上传') {
+                $Good->pic = '待上传';
+                
+            }
+        } else {
+            $filedir = "images/";
+            $image_name2=$detailPic->getClientOriginalName(); //获取上传图片的文件名
+            $detailPic->move($filedir,$image_name2); //使用move 方法移动文件.
+            if ($Good->detailPics) {
+                # 如果数据库中以前存储的detailPics不为空
+                $Good->detailPics = $Good->detailPics.'#'.$filedir.$image_name2;
+            } else {
+                # code...
+                $Good->detailPics = $filedir.$image_name2;
+            }
+            
         }
     	if ($Good->save()) {
     		return redirect('admin/good');

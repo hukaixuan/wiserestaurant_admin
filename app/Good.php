@@ -16,13 +16,13 @@ class Good extends Model
 	public function category()
 	{
 		# code...
-		return $this->belongsTo('App\Category','id','category_id');
+		return $this->belongsTo('App\Category','category_id','id');
 	}
 
 	public function type()
 	{
 		# code...
-		return $this->belongsTo('App\Type','id','type_id');
+		return $this->belongsTo('App\Type','type_id','id');
 	}
 
 

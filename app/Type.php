@@ -22,6 +22,6 @@ class Type extends Model
 	// }
 
 	public function goods(){
-		return $this->hasMany('App\Good','type','id');
+		return $this->hasMany('App\Good','type_id','id');
 	}
 }

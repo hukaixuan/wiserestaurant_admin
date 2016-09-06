@@ -11,7 +11,7 @@
               <h1>管理菜品</h1>
           </div>
         </a>
-        <a href="{{ url('admin/good') }}">
+        <a href="{{ url('admin/other') }}">
           <div class="tile tile-emerald col-md-3 col-xs-12"  >
             <h1>管理其他</h1>
           </div>
@@ -42,7 +42,7 @@
                 </span>
           </div>
         </a>
-        <a href="#">
+        <a href="{{ url('admin/package') }}">
           <div class="tile tile-clouds col-md-3 col-xs-12"  >
                 <span class="tile-label">
                     <h1>管理套餐</h1>

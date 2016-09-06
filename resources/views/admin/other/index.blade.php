@@ -18,21 +18,21 @@
                     
                 <div class="tabbable" id="tabs-705343">
                     <ul class="nav nav-tabs">
-                    <li><a href="{{url('admin/good')}}">全部菜品</a></li>
-                        @foreach ($types as $type)
+                    <li><a href="{{url('admin/other')}}">全部其他分类</a></li>
+                        @foreach ($categories as $category)
                         <li>
-                             <a href="{{url('admin/get_good_by_type/'.$type->id)}}" >{{ $type->name }}</a>
+                             <a href="{{url('admin/get_good_by_category/'.$category->id)}}" >{{ $category->name }}</a>
                         </li>
                         @endforeach
                     </ul>
                     <div class="tab-content">
                         
-                        <div class="tab-pane active" id="{{$type->id}}">
+                        <div class="tab-pane active" id="{{$category->id}}">
                             <p>
                                 <table class="table table-striped table-hover">
                                     <thead>
                                         <tr>
-                                            <th>菜名</th>
+                                            <th>商品名</th>
                                             <th>价格</th>
                                             <th>大分类</th>
                                             <th>菜品类别</th>

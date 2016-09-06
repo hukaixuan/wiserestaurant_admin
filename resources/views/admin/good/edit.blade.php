@@ -23,20 +23,21 @@
                         <input type="number" name="price" class="form-control" required="required" placeholder="请输入价格" value="{{$good->price}}">
                         <br>                        
                         <!-- <input type="text" name="type" class="form-control" required="required" placeholder="请选择分类" value="{{$good->type}}">   -->
-                            {{$good->category}}
-                        <select name="category" class="form-control">
+                            {{$good->category->name}}
+                        <select name="category_id" class="form-control">
                             @foreach ($categories as $category)
-                                <option value="{{$category->id}}">{{$category->id}}</option>
+                                <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                         </select>
                         <br> 
-                        {{$good->type}}<select name="type" class="form-control">
+                        {{$good->type->name}}<select name="type_id" class="form-control">
                             @foreach ($types as $type)
-                                <option value="{{$type->id}}">{{$type->id}}</option>
+                                <option value="{{$type->id}}">{{$type->name}}</option>
                             @endforeach
                         </select>
-                        <br>                        
-                        <div class="form-control">{{$good->pic}}<input type="file" accpet="image/*" id="pic" name="pic" placeholder="上传图片" value="{{$good->pic}}"></div>
+                        <br>   
+                        <img src="{{ asset($good->pic) }}" alt="" width="120px" height="100px"><br>{{$good->pic}}
+                        <input type="file" accpet="image/*" id="pic" name="pic" placeholder="修改主图片" value="{{$good->pic}}"  >
                         <br>   
                         <select name="isNew" class="form-control">
                             <option value="1">推荐</option>
@@ -45,7 +46,12 @@
                         <br>
                         <input type="text" name="detail" class="form-control" placeholder="详情" value="{{$good->detail}}">
                         <br>  
-                        <input type="text" name="detailPics" class="form-control" placeholder="详情图片" value="{{$good->detailPics}}">
+                       @foreach (explode('#',$good->detailPics) as $detailPic )
+                            @if ($detailPic)
+                                <td><img src="{{ asset($detailPic) }}" alt="" width="100px" height="90px"></td>&nbsp;
+                            @endif
+                        @endforeach
+                        <input type="file" accept="image/*" id="detailPics" name="detailPics" placeholder="添加详情图">添加详情图
                         <br>                       
 
                         <!-- <input type="boolean" name="isAvailable" class="form-control" required="required" placeholder="是否有货(1表示有货,0表示无货)" value="{{$good->isAvailable}}">

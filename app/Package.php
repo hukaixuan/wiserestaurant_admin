@@ -13,5 +13,6 @@ class Package extends Model
 	*/
 	protected $table = 'packages';
 
-	
+	public $timestamps = false; //不使用时间戳
+
 }

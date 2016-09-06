@@ -33,23 +33,35 @@
 
 
 
-  .grid .row {
-    background-color: transparent;
-    border: 0;
-    height: 50px;
-    padding-right: 0;
-    
-  }
-  .grid .row .col-md-3
-    {
-        min-height: 150px;
-    }
-  .grid .row .col-md-6
-    {
-        min-height: 300px;
-    }
+      .grid .row {
+        background-color: transparent;
+        border: 0;
+        height: 50px;
+        padding-right: 0;
+        
+      }
+      .grid .row .col-md-3
+        {
+            min-height: 150px;
+        }
+      .grid .row .col-md-6
+        {
+            min-height: 300px;
+        }
+
+        /*多图上传*/
+        /**{ margin:0; padding:0;}
+        #box{ margin:50px auto; width:30%px; min-height:400px; background:#ff9}
+*/
     </style>
 
+    <!-- 多图上传 -->
+    <!-- <script src="{{asset('resources/js/jquery.js')}}"></script>
+    <link href="{{asset('resources/css/webuploader.css')}}" rel="stylesheet">
+    <link href="{{asset('resources/css/diyUpload.css')}}" rel="stylesheet">
+    <script src="{{asset('resources/js/webuploader.html5only.min.js')}}"></script>
+    <script src="{{asset('resources/js/diyUpload.js')}}"></script>
+ -->
 </head>
 <!-- <body id="app-layout"> -->
 <body>
@@ -70,6 +82,10 @@
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
+
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/admin') }}">管理主页</a></li>
+                </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
@@ -123,6 +139,40 @@
     
     
   });
+  </script>
 
+
+  <!-- 多图上传 -->
+ <!--  <script>
+      $(function(){
+    $('#test').diyUpload({
+
+    url:"{{URL('some_upload_img')}}",
+    success:function( data ) {
+        console.log(data);
+        $("#pics").after("<input type='hidden' class='hidpic' value="+data.pic+">"); //图片上传成功会执行，就是把图片名字写到CLASS为HIDPIC的隐藏域里
+
+    },
+    error:function( err ) {
+        console.info( err );    
+    }
+    });
+
+    $('#show').click(function(){
+    
+//把CLASS为HIDPIC的VALUE组成用,链接的字符串，放在ID为PIC的隐藏域里
+    var b=$('.hidpic').map(function() {
+
+            return $(this).val();
+            
+        }).get().join(',');
+    $('#pics').val(b);
+    // alert($('#pics').val());
+
+    });
+
+});
+  </script>
+ -->
 </body>
 </html>

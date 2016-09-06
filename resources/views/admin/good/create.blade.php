@@ -21,15 +21,15 @@
                         <br>                        
                         <input type="number" name="price" class="form-control" required="required" placeholder="请输入价格">
                         <br>                        
-                        <select name="category" class="form-control">
+                        <select name="category_id" class="form-control">
                             @foreach ($categories as $category)
-                                <option value="{{$category->id}}">{{$category->id}}</option>
+                                <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach
                         </select>
                         <br>
-                        <select name="type" class="form-control">
+                        <select name="type_id" class="form-control">
                             @foreach ($types as $type)
-                                <option value="{{$type->id}}">{{$type->id}}</option>
+                                <option value="{{$type->id}}">{{$type->name}}</option>
                             @endforeach
                         </select>
                         <br>                        
@@ -42,8 +42,8 @@
                         <br>               
                         <input type="text" name="detail" class="form-control" placeholder="详情">
                         <br>
-                        <input type="text" name="detailPics" class="form-control" placeholder="上传详情图片们">
-                        <br>           
+                        <input type="file" accept="image/*" id="detailPics" name="detailPics" placeholder="添加详情图">添加详情图
+
 
                         <!-- <input type="text" name="isAvailable" class="form-control" required="required" placeholder="是否有货(1表示有货,0表示无货)"> -->
                         <!-- <select name="isAvailable" class="form-control">
@@ -54,9 +54,11 @@
                         <button class="btn btn-lg btn-info">新增</button>
                     </form>
 
+
                 </div>
             </div>
         </div>
     </div>
 </div>  
+                     
 @endsection
