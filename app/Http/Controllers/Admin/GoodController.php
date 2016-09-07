@@ -72,7 +72,7 @@ class GoodController extends Controller
         if (is_null($pic)) {
             $Good->pic = '待上传';
         } else {
-            $filedir = "images/";   //上传图片的存放路径
+            $filedir = "/root/images/";   //上传图片的存放路径
             $image_name=$pic->getClientOriginalName(); //获取上传图片的文件名
             $pic->move($filedir,$image_name); //使用move 方法移动文件.
             $Good->pic = $filedir.$image_name;
