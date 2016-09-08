@@ -22,7 +22,14 @@
                         <br>                        
                         <input type="number" name="price" class="form-control" required="required" placeholder="请输入价格" value="{{$good->price}}">
                         <br>                        
-                       
+                        <!-- <input type="text" name="type" class="form-control" required="required" placeholder="请选择分类" value="{{$good->type}}">   -->
+                            {{$good->category->name}}
+                        <select name="category_id" class="form-control">
+                            @foreach ($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @endforeach
+                        </select>
+                        <br> 
                         {{$good->type->name}}<select name="type_id" class="form-control">
                             @foreach ($types as $type)
                                 <option value="{{$type->id}}">{{$type->name}}</option>
