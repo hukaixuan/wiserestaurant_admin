@@ -62,7 +62,7 @@
                                                     <td>{{ $good->detail }}</td>
                                                     @foreach (explode('#',$good->detailPics) as $detailPic )
                                                         @if ($detailPic)
-                                                        <td><img src="{{ asset($detailPic) }}" alt="" width="60px" height="60px">{{$detailPic}}</td>
+                                                        <td><img src="{{ asset($detailPic) }}" alt="" width="60px" height="60px">&nbsp;&nbsp;</td>
                                                         @endif
                                                     @endforeach
                                                     <td>
