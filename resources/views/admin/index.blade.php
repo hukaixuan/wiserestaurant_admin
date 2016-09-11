@@ -30,18 +30,7 @@
       <div class="row col-md-12"></div>
       <div class="row col-md-12"></div>
       <div class="row col-md-12">
-        <a href="{{ url('admin/category') }}">
-          <div class="tile col-md-3 col-xs-12"  >
-            <div class="tile-content">
-              <!-- <div class="tile-icon-large">
-                <img src="images/twittertile.png">
-              </div> -->
-            </div>
-                <span class="tile-label">
-                    <h1>管理其他分类</h1>
-                </span>
-          </div>
-        </a>
+        
         <a href="{{ url('admin/package') }}">
           <div class="tile tile-clouds col-md-3 col-xs-12"  >
                 <span class="tile-label">
