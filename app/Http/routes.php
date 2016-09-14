@@ -11,12 +11,28 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
 
 //测试
 Route::get('/test', 'TestController@index');
+Route::get('/hello', function ()
+{
+    return 'hello';
+});
+
+Route::get('/download_client',function ()
+{
+    # code...
+    return response()->download('download/apk/wiserestaurant.apk');
+    // return view('welcome');
+});
+Route::get('download_admin',function(){
+    return response()->download('');
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +47,7 @@ Route::get('/test', 'TestController@index');
 
 Route::group(['middleware' => ['web']], function () {
     //
+    
 });
 
 

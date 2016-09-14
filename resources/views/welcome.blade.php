@@ -8,7 +8,8 @@
                 <div class="panel-heading">Welcome</div>
 
                 <div class="panel-body">
-                    Your Application's Landing Page.
+                    <div class="panel-control"><h3>扫码下载客户端</h3></div>
+                    <div class="panel-control"><img src="{{asset('/download/image/download.png')}}" alt=""></div>
                 </div>
             </div>
         </div>
