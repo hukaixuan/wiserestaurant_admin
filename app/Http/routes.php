@@ -29,6 +29,12 @@ Route::get('/download_client',function ()
     return response()->download('download/apk/wiserestaurant.apk');
     // return view('welcome');
 });
+Route::get('/download_admin',function ()
+{
+    # code...
+    return response()->download('download/apk/wiserestaurant_admin.apk');
+    // return view('welcome');
+});
 Route::get('download_admin',function(){
     return response()->download('');
 });
