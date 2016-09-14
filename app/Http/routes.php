@@ -32,7 +32,7 @@ Route::get('/download_client',function ()
 Route::get('/download_admin',function ()
 {
     # code...
-    return response()->download('download/apk/wiserestaurant_admin.apk');
+    return response()->download('download/apk/wiserestaurantadmin.apk');
     // return view('welcome');
 });
 Route::get('download_admin',function(){
